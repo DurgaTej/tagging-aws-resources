@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS Config Custom Rule StackSet
+
+Parameters:
+  LambdaFunctionARN:
+    Type: String
+    Description: ARN of the AWS Config validation Lambda function
+
+Resources:
+  ConfigCustomRule:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: ValidateMmsystemTagRule
+      Description: Ensures newly created resources have the 'mmsystem' tag with valid values.
+      Source:
+        Owner: CUSTOM_LAMBDA
+        SourceIdentifier: !Ref LambdaFunctionARN
+        SourceDetails:
+          - EventSource: aws.config
+            MessageType: ConfigurationItemChangeNotification
+      Scope:
+        ComplianceResourceTypes: [] # Empty means it applies to all resource types
+
+Outputs:
+  ConfigRuleName:
+    Description: Name of the AWS Config custom rule
+    Value: !Ref ConfigCustomRule
