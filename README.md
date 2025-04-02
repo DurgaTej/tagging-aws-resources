@@ -1,3 +1,5 @@
+https://docs.google.com/document/d/18anIrcTheBe4tfwCbu8kr91EpHfNgvpoJrwYFYYuwMQ/edit?usp=sharing
+
 I checked your GitHub repository: tagging-aws-resources. Since you're using Terraform modules to manage CloudFormation StackSets, you need to structure your dependencies properly.
 
 Steps to Ensure Proper StackSet Order
